@@ -10,7 +10,6 @@ import datetime
 
 # --------------------------
 # LOAD SECRETS FROM ENVIRONMENT VARIABLES
-# These will be set inside Render dashboard
 # --------------------------
 DISCORD_BOT_TOKEN = os.getenv("DISCORD_BOT_TOKEN")
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
@@ -32,18 +31,19 @@ server = Thread(target=run_flask)
 server.start()
 
 # --------------------------
-# DISCORD BOT SETUP
+# DISCORD BOT SETUP - TOTALLY FIXED INTENTS SETUP
 # --------------------------
-intents = discord.Intents.default()
-intents.message_content = True
-intents.members = True
-intents.guilds = True
-intents.bans = True
-intents.kick_members = True
-intents.manage_messages = True
-intents.manage_roles = True
-intents.manage_channels = True
-intents.manage_guild = True
+intents = discord.Intents(
+    message_content=True,
+    members=True,
+    guilds=True,
+    bans=True,
+    kick_members=True,
+    manage_messages=True,
+    manage_roles=True,
+    manage_channels=True,
+    manage_guild=True
+)
 
 bot = commands.Bot(command_prefix="!", intents=intents, help_command=None)
 
@@ -325,4 +325,4 @@ async def check_content(ctx, *, content: str):
 # RUN BOT
 # --------------------------
 bot.run(DISCORD_BOT_TOKEN)
-    
+        
