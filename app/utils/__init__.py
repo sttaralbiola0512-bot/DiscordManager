@@ -1,3 +1,0 @@
-"""
-Discord Bot Utilities Package
-"""
